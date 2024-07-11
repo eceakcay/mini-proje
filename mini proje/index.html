@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript for Everyone:DOM</title>
+    <style>
+      ul{
+        list-style-type:none;
+      }
+      #date-time{
+        line-height: 2;
+        margin: auto;
+      
+      }
+      .completed{
+        background-color: #008000;
+        margin-bottom: 5px;
+        line-height: 2;
+      }
+      .ongoing{
+        background-color: yellow;
+        margin-bottom: 5px;
+        line-height: 2;
+        
+      }
+      .coming{
+        background-color: red;
+        margin-bottom: 5px;
+        line-height: 2;
+      }
+      .wrapper{
+        text-align: center;
+        display:flex ;
+        align-items: center;
+        flex-direction: column;
+      }
+      .wrapper > * {
+      width: 100%;
+      max-width: 900px; /* İstediğiniz genişliği ayarlayabilirsiniz */
+      box-sizing: border-box;
+      padding: 10px;
+    }
+    #current-year{
+      font-size: 62px;
+    }
+    #year{
+      margin-bottom: 0px;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+        <h1 id="year">JavaScript challenges in <span id="current-year">2024</span></h1>
+        <h2 id="datetime">30DaysOfJavaScript Challenge</h2>
+        <div id="date-time"></div>
+        <ul>
+            <li class="completed">30DaysOfPython Challenge Done</li>
+            <li class="ongoing">30DaysOfJavaScript Challenge Ongoing</li>
+            <li class="coming">30DaysOfReact Challenge Coming</li>
+            <li class="coming">30DaysOfFullStack Challenge Coming</li>
+            <li class="coming">30DaysOfDataAnalysis Challenge Coming</li>
+            <li class="coming">30DaysOfReactNative Challenge Coming</li>
+            <li class="coming">30DaysOfMachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+    <script>
+
+      function getRandomColor(){
+        let hexadecimal='0123456789ABCDEF';
+        let color='#';
+        for(let i=0;i<6;i++){
+          color=color+hexadecimal[Math.floor(Math.random()*16)];
+        }
+        return color;//sonucun dış dünyaya dönmesi
+      }
+
+      function changeYearColor(){
+        let yearElement=document.getElementById('current-year');
+        yearElement.style.color=getRandomColor();
+      }
+
+      function changeDateTimeColor(){
+        let dateTimeElement=document.getElementById('date-time');
+        dateTimeElement.style.backgroundColor=getRandomColor();
+      }
+
+
+
+      function updateDateTime(){
+        let dateTimeElement=document.getElementById('date-time');
+        let tarih=new Date();
+        let year=tarih.getFullYear();
+        let month=String(tarih.getMonth()+1).padStart(2,'0');
+        let day=String(tarih.getDay()).padStart(2,'0');
+        let hours=String(tarih.getHours()).padStart(2,'0');
+        let minutes=String(tarih.getMinutes()).padStart(2,'0');
+        let seconds=String(tarih.getSeconds()).padStart(2,'0');
+
+        let fullTarih=year+"-"+month+"-"+day+"- "+hours+":"+minutes+":"+seconds;
+        dateTimeElement.textContent=fullTarih;
+      }
+
+      setInterval(changeYearColor,1000);
+      setInterval(changeDateTimeColor,1000);
+      setInterval(updateDateTime,1000);
+      window.onload=updateDateTime;
+
+
+
+
+
+    </script>
+  </body>
+</html>
